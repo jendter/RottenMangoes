@@ -95,7 +95,7 @@
         <!--Showtimes-->
         <scene sceneID="3rS-hc-hJ5">
             <objects>
-                <viewController title="Showtimes" id="osJ-Ht-e7N" sceneMemberID="viewController">
+                <viewController title="Showtimes" id="osJ-Ht-e7N" customClass="ShowtimesViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="orT-6n-umJ"/>
                         <viewControllerLayoutGuide type="bottom" id="oek-YH-oNK"/>
@@ -103,13 +103,62 @@
                     <view key="view" contentMode="scaleToFill" id="032-El-dTw">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Placeholder Text Set in Code" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="HVV-uG-FdN">
+                                <rect key="frame" x="16" y="74" width="533" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="0.20999999999999999" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sPM-K2-w26">
+                                <rect key="frame" x="16" y="112" width="568" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="Qim-md-7Xs"/>
+                                </constraints>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYL-dr-n6Z">
+                                <rect key="frame" x="560" y="77" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="fvm-b4-cda"/>
+                                    <constraint firstAttribute="width" constant="24" id="gxn-68-pP1"/>
+                                </constraints>
+                                <state key="normal" image="locationArrowIconGrey">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="locationButtonPressed:" destination="osJ-Ht-e7N" eventType="touchUpInside" id="1eM-YE-gls"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mYL-dr-n6Z" firstAttribute="top" secondItem="orT-6n-umJ" secondAttribute="bottom" constant="13" id="2sj-PD-e2h"/>
+                            <constraint firstItem="HVV-uG-FdN" firstAttribute="leading" secondItem="032-El-dTw" secondAttribute="leadingMargin" id="6Ec-hr-GLx"/>
+                            <constraint firstItem="mYL-dr-n6Z" firstAttribute="leading" secondItem="HVV-uG-FdN" secondAttribute="trailing" constant="11" id="WYB-Rv-YKf"/>
+                            <constraint firstItem="sPM-K2-w26" firstAttribute="trailing" secondItem="032-El-dTw" secondAttribute="trailingMargin" id="XjO-xh-Hdh"/>
+                            <constraint firstItem="HVV-uG-FdN" firstAttribute="top" secondItem="orT-6n-umJ" secondAttribute="bottom" constant="10" id="iBY-0v-4yI"/>
+                            <constraint firstItem="sPM-K2-w26" firstAttribute="top" secondItem="HVV-uG-FdN" secondAttribute="bottom" constant="8" id="mf5-Ok-lOi"/>
+                            <constraint firstItem="mYL-dr-n6Z" firstAttribute="trailing" secondItem="032-El-dTw" secondAttribute="trailingMargin" id="tpo-9W-7Co"/>
+                            <constraint firstItem="mYL-dr-n6Z" firstAttribute="leading" secondItem="HVV-uG-FdN" secondAttribute="trailing" constant="21" id="vgW-Uj-9A4"/>
+                            <constraint firstItem="sPM-K2-w26" firstAttribute="leading" secondItem="032-El-dTw" secondAttribute="leadingMargin" id="zO0-9a-I1z"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="vgW-Uj-9A4"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Showtimes" id="8hS-ax-Ce9"/>
+                    <connections>
+                        <outlet property="localTheatersMapView" destination="sPM-K2-w26" id="BgG-Ae-n0X"/>
+                        <outlet property="locationButton" destination="mYL-dr-n6Z" id="mx7-4M-ksI"/>
+                        <outlet property="locationSearchTextField" destination="HVV-uG-FdN" id="wNB-cR-Rki"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yt5-RM-eL1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2446" y="1226"/>
+            <point key="canvasLocation" x="1940" y="1050"/>
         </scene>
         <!--Movie Details View Controller-->
         <scene sceneID="DMf-tc-n1A">
@@ -133,7 +182,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="97%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDG-iq-F1D">
                                 <rect key="frame" x="549" y="251" width="35" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.99215686274509807" green="0.94117647058823528" blue="0.14509803921568629" alpha="0.92000000000000004" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.71372549019607845" green="0.83921568627450982" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Synopsis" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHI-X3-wS3">
@@ -143,7 +192,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="120" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="5UX-XO-nPM">
-                                <rect key="frame" x="16" y="276" width="568" height="324"/>
+                                <rect key="frame" x="16" y="276" width="568" height="275"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="3" maxX="0.0" maxY="0.0"/>
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -300,6 +349,11 @@ Review Text</string>
                     <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" id="awN-H8-5iA">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.71372549019607845" green="0.83921568627450982" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="L4A-pv-NhF" kind="relationship" relationship="viewControllers" id="Z7K-Kv-qt3"/>
@@ -308,7 +362,7 @@ Review Text</string>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ol4-WM-ThA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="396" y="268"/>
+            <point key="canvasLocation" x="388" y="668"/>
         </scene>
         <!--Showtimes-->
         <scene sceneID="BJF-uD-52a">
@@ -327,12 +381,13 @@ Review Text</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YxY-RC-twe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1634" y="1226"/>
+            <point key="canvasLocation" x="1208" y="1050"/>
         </scene>
     </scenes>
     <resources>
         <image name="clapboardIcon" width="24" height="24"/>
         <image name="freshMedium" width="23" height="23"/>
+        <image name="locationArrowIconGrey" width="24" height="24"/>
         <image name="ticketIcon" width="28" height="18"/>
     </resources>
 </document>

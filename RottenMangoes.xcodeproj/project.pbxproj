@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27DF50D01B45BE67004FA620 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DF50CF1B45BE67004FA620 /* MapKit.framework */; };
+		27DF50D31B45BF79004FA620 /* ShowtimesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DF50D21B45BF79004FA620 /* ShowtimesViewController.m */; };
 		27F9BDFF1B444E5500657E09 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F9BDFE1B444E5500657E09 /* main.m */; };
 		27F9BE021B444E5500657E09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F9BE011B444E5500657E09 /* AppDelegate.m */; };
 		27F9BE051B444E5500657E09 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F9BE041B444E5500657E09 /* ViewController.m */; };
@@ -32,6 +34,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27DF50CF1B45BE67004FA620 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		27DF50D11B45BF79004FA620 /* ShowtimesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowtimesViewController.h; sourceTree = "<group>"; };
+		27DF50D21B45BF79004FA620 /* ShowtimesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowtimesViewController.m; sourceTree = "<group>"; };
 		27F9BDF91B444E5500657E09 /* RottenMangoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RottenMangoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F9BDFD1B444E5500657E09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27F9BDFE1B444E5500657E09 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -62,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27DF50D01B45BE67004FA620 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +84,7 @@
 		27F9BDF01B444E5500657E09 = {
 			isa = PBXGroup;
 			children = (
+				27DF50CF1B45BE67004FA620 /* MapKit.framework */,
 				27F9BDFB1B444E5500657E09 /* RottenMangoes */,
 				27F9BE151B444E5500657E09 /* RottenMangoesTests */,
 				27F9BDFA1B444E5500657E09 /* Products */,
@@ -100,17 +107,19 @@
 				27F9BE011B444E5500657E09 /* AppDelegate.m */,
 				27F9BE031B444E5500657E09 /* ViewController.h */,
 				27F9BE041B444E5500657E09 /* ViewController.m */,
+				27F9BE251B445AC800657E09 /* MovieCell.h */,
+				27F9BE261B445AC800657E09 /* MovieCell.m */,
 				27F9BE281B44695A00657E09 /* MovieDetailsViewController.h */,
 				27F9BE291B44695A00657E09 /* MovieDetailsViewController.m */,
 				27F9BE2E1B44BC6A00657E09 /* ReviewCell.h */,
 				27F9BE2F1B44BC6A00657E09 /* ReviewCell.m */,
+				27DF50D11B45BF79004FA620 /* ShowtimesViewController.h */,
+				27DF50D21B45BF79004FA620 /* ShowtimesViewController.m */,
 				27F9BE221B44541600657E09 /* Movie.h */,
 				27F9BE231B44541600657E09 /* Movie.m */,
 				27F9BE2B1B44B1EE00657E09 /* Review.h */,
 				27F9BE2C1B44B1EE00657E09 /* Review.m */,
 				27F9BE061B444E5500657E09 /* Main.storyboard */,
-				27F9BE251B445AC800657E09 /* MovieCell.h */,
-				27F9BE261B445AC800657E09 /* MovieCell.m */,
 				27F9BE091B444E5500657E09 /* Images.xcassets */,
 				27F9BE0B1B444E5500657E09 /* LaunchScreen.xib */,
 				27F9BDFC1B444E5500657E09 /* Supporting Files */,
@@ -248,6 +257,7 @@
 				27F9BE301B44BC6A00657E09 /* ReviewCell.m in Sources */,
 				27F9BE271B445AC800657E09 /* MovieCell.m in Sources */,
 				27F9BE021B444E5500657E09 /* AppDelegate.m in Sources */,
+				27DF50D31B45BF79004FA620 /* ShowtimesViewController.m in Sources */,
 				27F9BE241B44541600657E09 /* Movie.m in Sources */,
 				27F9BE2A1B44695A00657E09 /* MovieDetailsViewController.m in Sources */,
 				27F9BE2D1B44B1EE00657E09 /* Review.m in Sources */,
@@ -446,6 +456,7 @@
 				27F9BE1E1B444E5500657E09 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		27F9BE1F1B444E5500657E09 /* Build configuration list for PBXNativeTarget "RottenMangoesTests" */ = {
 			isa = XCConfigurationList;
@@ -454,6 +465,7 @@
 				27F9BE211B444E5500657E09 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
