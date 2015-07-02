@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="L4A-pv-NhF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Eie-HG-5cg">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -70,11 +70,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="oc5-yE-rhm" secondAttribute="bottom" id="50h-2T-TNL"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="oc5-yE-rhm" secondAttribute="bottom" constant="-49" id="50h-2T-TNL"/>
                             <constraint firstItem="oc5-yE-rhm" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="6iE-cB-im2"/>
                             <constraint firstAttribute="trailing" secondItem="oc5-yE-rhm" secondAttribute="trailing" id="klC-Zb-HoN"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="oc5-yE-rhm" secondAttribute="bottom" constant="-49" id="nxv-ie-Zoy"/>
                             <constraint firstItem="oc5-yE-rhm" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="ye5-vy-Uxz"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="50h-2T-TNL"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="In Theaters" id="e0f-zr-ug6"/>
                     <connections>
@@ -84,7 +90,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1128" y="268"/>
+            <point key="canvasLocation" x="1940" y="268"/>
+        </scene>
+        <!--Showtimes-->
+        <scene sceneID="3rS-hc-hJ5">
+            <objects>
+                <viewController title="Showtimes" id="osJ-Ht-e7N" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="orT-6n-umJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="oek-YH-oNK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="032-El-dTw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Showtimes" id="8hS-ax-Ce9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yt5-RM-eL1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2446" y="1226"/>
         </scene>
         <!--Movie Details View Controller-->
         <scene sceneID="DMf-tc-n1A">
@@ -245,12 +270,13 @@ Review Text</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pFp-7R-fsI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1834" y="268"/>
+            <point key="canvasLocation" x="2646" y="268"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--In Theaters-->
         <scene sceneID="S7h-BV-jAy">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="L4A-pv-NhF" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="In Theaters" image="clapboardIcon" id="kob-RN-XEs"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="ahH-im-mjp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -263,10 +289,50 @@ Review Text</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6cb-2e-q5e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1208" y="268"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="PSK-gb-Nay">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Eie-HG-5cg" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" id="awN-H8-5iA">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="L4A-pv-NhF" kind="relationship" relationship="viewControllers" id="Z7K-Kv-qt3"/>
+                        <segue destination="AH9-vq-NwC" kind="relationship" relationship="viewControllers" id="PeI-lV-6aa"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ol4-WM-ThA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="396" y="268"/>
+        </scene>
+        <!--Showtimes-->
+        <scene sceneID="BJF-uD-52a">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AH9-vq-NwC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Showtimes" image="ticketIcon" id="n85-a8-ZI7"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="bhc-uP-JjX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="osJ-Ht-e7N" kind="relationship" relationship="rootViewController" id="ODm-Ov-FFJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YxY-RC-twe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1634" y="1226"/>
         </scene>
     </scenes>
     <resources>
+        <image name="clapboardIcon" width="24" height="24"/>
         <image name="freshMedium" width="23" height="23"/>
+        <image name="ticketIcon" width="28" height="18"/>
     </resources>
 </document>
