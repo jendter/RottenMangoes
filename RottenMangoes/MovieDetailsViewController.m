@@ -27,7 +27,7 @@
     //moviePosterHighResImageView.image = movie.image;
     self.navigationItem.title = self.movie.title;
     self.synopsisLabel.text = self.movie.synopsis;
-    self.criticsScoreLabel.text = [NSString stringWithFormat:@"%@ %%", self.movie.criticsScore];
+    self.criticsScoreLabel.text = [NSString stringWithFormat:@"%@%%", self.movie.criticsScore];
     
     // If the score is over
     int movieScoreInt = [self.movie.criticsScore intValue];
@@ -197,7 +197,7 @@
     
     Review *reviewForCell = self.movie.reviews[indexPath.row];
     
-    cell.criticLabel.text = reviewForCell.critic;
+    cell.criticLabel.text = [NSString stringWithFormat:@"%@,", reviewForCell.critic];
     cell.publicationLabel.text = reviewForCell.publication;
     cell.reviewQuoteLabel.text = reviewForCell.quote;
     
