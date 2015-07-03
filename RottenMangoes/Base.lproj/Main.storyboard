@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--In Theaters-->
+        <!--Now Playing-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
@@ -82,7 +82,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="In Theaters" id="e0f-zr-ug6"/>
+                    <navigationItem key="navigationItem" title="Now Playing" id="e0f-zr-ug6"/>
                     <connections>
                         <outlet property="collectionView" destination="oc5-yE-rhm" id="fW6-gI-Hew"/>
                         <segue destination="xXF-VA-k8w" kind="show" identifier="showMovieDetails" id="yFC-PH-IQ3"/>
@@ -179,7 +179,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Showtimes" id="8hS-ax-Ce9"/>
+                    <navigationItem key="navigationItem" title="Theaters" id="8hS-ax-Ce9"/>
                     <connections>
                         <outlet property="localTheatersMapView" destination="sPM-K2-w26" id="BgG-Ae-n0X"/>
                         <outlet property="locationButton" destination="mYL-dr-n6Z" id="mx7-4M-ksI"/>
@@ -222,7 +222,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.89000000000000001" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="120" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="5UX-XO-nPM">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="10" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="5UX-XO-nPM">
                                 <rect key="frame" x="16" y="276" width="568" height="275"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="3" maxX="0.0" maxY="0.0"/>
@@ -230,14 +230,30 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reviewCell" rowHeight="120" id="0so-gc-bKm" customClass="ReviewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="getShowtimesCell" textLabel="Flm-Hx-zW8" rowHeight="20" style="IBUITableViewCellStyleDefault" id="WB1-Sv-ogb">
+                                        <rect key="frame" x="0.0" y="0.0" width="568" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WB1-Sv-ogb" id="bNu-b7-aAi">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Showtimes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Flm-Hx-zW8">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.71372549019999998" green="0.83921568629999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reviewCell" rowHeight="120" id="0so-gc-bKm" customClass="ReviewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="568" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0so-gc-bKm" id="i2T-69-Lfj">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3a9-s2-RsX">
-                                                    <rect key="frame" x="0.0" y="14" width="568" height="85"/>
+                                                    <rect key="frame" x="0.0" y="6" width="568" height="85"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IuE-Rf-6oF">
                                                             <rect key="frame" x="47" y="8" width="513" height="69"/>
@@ -269,13 +285,13 @@ Review Text</string>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Critic," lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yK-IL-xcz">
-                                                    <rect key="frame" x="8" y="102" width="37" height="17"/>
+                                                    <rect key="frame" x="8" y="94" width="37" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="0.47999999999999998" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publication" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fb8-aa-7ei">
-                                                    <rect key="frame" x="49" y="102" width="70" height="17"/>
+                                                    <rect key="frame" x="49" y="94" width="70" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="0.47999999999999998" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -287,7 +303,7 @@ Review Text</string>
                                                 <constraint firstItem="Fb8-aa-7ei" firstAttribute="centerY" secondItem="0yK-IL-xcz" secondAttribute="centerY" constant="-0.5" id="5cf-Dg-PRJ"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="3a9-s2-RsX" secondAttribute="trailing" constant="-8" id="MJE-AR-tAK"/>
                                                 <constraint firstItem="Fb8-aa-7ei" firstAttribute="top" secondItem="3a9-s2-RsX" secondAttribute="bottom" constant="3" id="SGJ-QD-ogw"/>
-                                                <constraint firstItem="3a9-s2-RsX" firstAttribute="top" secondItem="i2T-69-Lfj" secondAttribute="topMargin" constant="6" id="g61-uT-kgr"/>
+                                                <constraint firstItem="3a9-s2-RsX" firstAttribute="top" secondItem="i2T-69-Lfj" secondAttribute="topMargin" constant="-2" id="g61-uT-kgr"/>
                                                 <constraint firstItem="Fb8-aa-7ei" firstAttribute="baseline" secondItem="0yK-IL-xcz" secondAttribute="baseline" id="ngJ-Sh-TbX"/>
                                                 <constraint firstItem="3a9-s2-RsX" firstAttribute="leading" secondItem="i2T-69-Lfj" secondAttribute="leadingMargin" constant="-8" id="u2X-t4-ihL"/>
                                                 <constraint firstItem="Fb8-aa-7ei" firstAttribute="leading" secondItem="0yK-IL-xcz" secondAttribute="trailing" constant="4" id="ukF-2Y-oZM"/>
@@ -352,11 +368,11 @@ Review Text</string>
             </objects>
             <point key="canvasLocation" x="2646" y="268"/>
         </scene>
-        <!--In Theaters-->
+        <!--Now Playing-->
         <scene sceneID="S7h-BV-jAy">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="L4A-pv-NhF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="In Theaters" image="clapboardIcon" id="kob-RN-XEs"/>
+                    <tabBarItem key="tabBarItem" title="Now Playing" image="ticketIcon" id="kob-RN-XEs"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="ahH-im-mjp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -395,11 +411,11 @@ Review Text</string>
             </objects>
             <point key="canvasLocation" x="388" y="668"/>
         </scene>
-        <!--Showtimes-->
+        <!--Theaters-->
         <scene sceneID="BJF-uD-52a">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AH9-vq-NwC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Showtimes" image="ticketIcon" id="n85-a8-ZI7"/>
+                    <tabBarItem key="tabBarItem" title="Theaters" image="locationArrowIcon" id="n85-a8-ZI7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="bhc-uP-JjX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -416,8 +432,8 @@ Review Text</string>
         </scene>
     </scenes>
     <resources>
-        <image name="clapboardIcon" width="24" height="24"/>
         <image name="freshMedium" width="23" height="23"/>
+        <image name="locationArrowIcon" width="24" height="24"/>
         <image name="locationArrowIconGrey" width="24" height="24"/>
         <image name="ticketIcon" width="28" height="18"/>
     </resources>

@@ -64,7 +64,7 @@
     self.initialLocationSet = NO;
     
     // Test Fetch
-    [self fetchMovieDataForZipCode:@""];
+    //[self fetchMovieDataForZipCode:@""];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -126,10 +126,12 @@
         
         // Set the location arrow to enabled
         self.locationArrowIsEnabled = YES;
+        
+        // Update theater list
+        [self updateTheaterListForLocation:[self.locationManager location]];
     }
     
 }
-
 
 
 #pragma mark CLLocationManagerDelegate
@@ -146,19 +148,41 @@
     
     if (!self.initialLocationSet) {
         self.initialLocationSet = YES;
-        self.locationArrowIsEnabled = YES;
+        self.locationArrowIsEnabled = YES; // Set the location arrow to the correct color
         
+        // Update the on screen map
         MKCoordinateRegion region = MKCoordinateRegionMake(currentLocation.coordinate, MKCoordinateSpanMake(0.02, 0.02));
         [self.localTheatersMapView setRegion:region animated:YES];
+        
+        // Update the on screen theater list
+        [self updateTheaterListForLocation:[self.locationManager location]];
     }
 }
 
 
 
-#pragma mark - Parsing
+#pragma mark - Parsing and Associated Helper Methods
 
--(void)fetchMovieDataForZipCode:(NSString *)zipCode {
-    NSString *urlString = @"http://lighthouse-movie-showtimes.herokuapp.com/theatres.json?address=V6B1E6&movie=Max";
+-(void)updateTheaterListForLocation:(CLLocation *)location {
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (error) {
+            NSLog(@"Geocode failed with error: %@", error);
+            return;
+        } else if ([placemarks firstObject]) {
+            CLPlacemark *placemark = [placemarks firstObject];
+            NSString *zipCode = placemark.postalCode;
+            zipCode = [zipCode stringByReplacingOccurrencesOfString:@" " withString:@""];
+            [self fetchMovieDataForZipCode:zipCode];
+        }
+    }];
+}
+
+-(void)fetchMovieDataForZipCode:(NSString *)zipCode {    
+    NSString *urlString = @"http://lighthouse-movie-showtimes.herokuapp.com/theatres.json?address=";
+    urlString = [urlString stringByAppendingString:zipCode];
+    urlString = [urlString stringByAppendingString:@"&movie=Max"]; // This is hard coded because of the limit on the example API
+                                                                   // TODO: Replace API
     
     NSURL *url = [NSURL URLWithString:urlString];
     
@@ -200,21 +224,6 @@
     
     [task resume];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #pragma mark - Table view data source

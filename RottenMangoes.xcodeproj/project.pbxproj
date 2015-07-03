@@ -94,11 +94,11 @@
 			name = "Test Locations";
 			sourceTree = "<group>";
 		};
-		270B557B1B46199000899714 /* Theaters For Movie */ = {
+		270B557B1B46199000899714 /* Showtimes For Movie */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = "Theaters For Movie";
+			name = "Showtimes For Movie";
 			sourceTree = "<group>";
 		};
 		272310E11B45E5EB003890EE /* Model Objects */ = {
@@ -133,7 +133,7 @@
 				27F9BE291B44695A00657E09 /* MovieDetailsViewController.m */,
 				27F9BE2E1B44BC6A00657E09 /* ReviewCell.h */,
 				27F9BE2F1B44BC6A00657E09 /* ReviewCell.m */,
-				270B557B1B46199000899714 /* Theaters For Movie */,
+				270B557B1B46199000899714 /* Showtimes For Movie */,
 			);
 			name = "Movie Details";
 			sourceTree = "<group>";

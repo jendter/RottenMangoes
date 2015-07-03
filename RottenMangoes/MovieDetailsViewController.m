@@ -183,54 +183,52 @@
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.movie.reviews.count;
+    if (section == 0) {
+        return 1;
+    } else {
+        return self.movie.reviews.count;
+    }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //ReviewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reviewCell" forIndexPath:indexPath];
-    
-    ReviewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reviewCell" forIndexPath:indexPath];
-    
-    Review *reviewForCell = self.movie.reviews[indexPath.row];
-    
-    cell.criticLabel.text = [NSString stringWithFormat:@"%@,", reviewForCell.critic];
-    cell.publicationLabel.text = reviewForCell.publication;
-    cell.reviewQuoteLabel.text = reviewForCell.quote;
-    
-    if ([reviewForCell.freshness  isEqual: @"rotten"]) {
-        cell.freshOrRottenImage.image = [UIImage imageNamed:@"rottenMedium"];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
+    if (indexPath.section == 0) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"getShowtimesCell" forIndexPath:indexPath];
+        return cell;
     } else {
-        cell.freshOrRottenImage.image = [UIImage imageNamed:@"freshMedium"];
+        ReviewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reviewCell" forIndexPath:indexPath];
+        
+        Review *reviewForCell = self.movie.reviews[indexPath.row];
+        
+        cell.criticLabel.text = [NSString stringWithFormat:@"%@,", reviewForCell.critic];
+        cell.publicationLabel.text = reviewForCell.publication;
+        cell.reviewQuoteLabel.text = reviewForCell.quote;
+        
+        if ([reviewForCell.freshness  isEqual: @"rotten"]) {
+            cell.freshOrRottenImage.image = [UIImage imageNamed:@"rottenMedium"];
+        } else {
+            cell.freshOrRottenImage.image = [UIImage imageNamed:@"freshMedium"];
+        }
+        
+        // Round the corners on the cell
+        cell.quoteContainerView.clipsToBounds = YES;
+        cell.quoteContainerView.layer.cornerRadius = 5.0f;
+        
+        return cell;
     }
     
-    // Round the corners on the cell
-    cell.quoteContainerView.clipsToBounds = YES;
-    cell.quoteContainerView.layer.cornerRadius = 5.0f;
-    
-    //cell.criticLabel.text = @"sd";
-    
-//    Todo *todo = self.objects[indexPath.row];
-//    NSLog(@"Making object at: %@", todo);
-//    cell.todoObject = todo;
-//    cell.titleLabel.text = todo.title;
-//    cell.descriptionLabel.text = todo.todoDescription;
-//    cell.priorityLabel.text = [todo priorityString];
-//    
-//    if (todo.isCompleted) {
-//        NSNumber *strikeSize = [NSNumber numberWithInt:2];
-//        NSDictionary *strikeThroughAttribute = [NSDictionary dictionaryWithObject:strikeSize forKey:NSStrikethroughStyleAttributeName];
-//        NSString *stringToStrikeThrough = cell.titleLabel.text;
-//        NSAttributedString *strikeThroughText = [[NSAttributedString alloc] initWithString:stringToStrikeThrough attributes:strikeThroughAttribute];
-//        cell.titleLabel.attributedText = strikeThroughText;
-//    }
-//    
-    return cell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return 42.0;
+    } else {
+        return 120.0;
+    }
+}
 
 
 
