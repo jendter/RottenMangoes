@@ -66,8 +66,9 @@
     // No map view rotation
     self.localTheatersMapView.rotateEnabled = NO;
     
-    // Test Fetch
-    //[self fetchMovieDataForZipCode:@""];
+    // TODO: Set the map view's default center to the region the app was built for (currently it defaults to Canada). Note: It might do this already.
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,7 +82,6 @@
 -(void)setLocationArrowIsEnabled:(BOOL)locationArrowIsEnabled {
     _locationArrowIsEnabled = locationArrowIsEnabled;
     if (locationArrowIsEnabled) {
-        //UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         UIImage *image = [[UIImage imageNamed:@"locationArrowIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [self.locationButton setImage:image forState:UIControlStateNormal];
         self.locationButton.tintColor = [UIColor colorWithRed:182.0/255.0 green:214.0/255.0 blue:80.0/255.0 alpha:1];
@@ -130,7 +130,6 @@
         
         // Center on current location (for immediate user feedback)
             // We also do this after we update the theater list
-            //[self clearMapAnnotations]; // Necessary to avoid scrolling bug
             CLLocationCoordinate2D coordinate = self.localTheatersMapView.userLocation.coordinate;
             MKCoordinateRegion region = self.localTheatersMapView.region; //MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(0.02, 0.02));
             [self centerMapOnLocationCoordinate:coordinate forRegion:region];
@@ -158,6 +157,10 @@
     if (!self.initialLocationSet) {
         self.initialLocationSet = YES;
         self.locationArrowIsEnabled = YES; // Set the location arrow to the correct color
+        
+//        CLLocationCoordinate2D coordinate = self.localTheatersMapView.userLocation.coordinate;
+//        MKCoordinateRegion region = MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(0.02, 0.02)); //self.localTheatersMapView.region;
+//        [self centerMapOnLocationCoordinate:coordinate forRegion:region];
         
         // Update the on screen theater list
         [self updateTheaterListForLocation:[self.locationManager location]];
@@ -198,7 +201,6 @@
             // Center the map on the zip code
             // This will happen when the request for theater data completes as well
             // but this means that if the fetch takes a while, the map change will still show immediately
-            //[self clearMapAnnotations]; // Necessary to avoid scrolling bug
             MKCoordinateRegion mapViewCurrentRegion = [self.localTheatersMapView region];
             [self centerMapOnLocationCoordinate:placemark.location.coordinate forRegion:mapViewCurrentRegion];
             
