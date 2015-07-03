@@ -269,7 +269,7 @@
                     // Update the map
                     if (self.locationArrowIsEnabled) {
                         
-                        CLLocationCoordinate2D coordinate = self.localTheatersMapView.userLocation.coordinate;
+                        CLLocationCoordinate2D coordinate = [[self.locationManager location] coordinate];
                         MKCoordinateRegion region = MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(0.025, 0.025));
                             // TODO: Set region to include all theaters
                         
@@ -290,6 +290,7 @@
 #pragma mark - Centering
 
 -(void)centerMapOnLocationCoordinate:(CLLocationCoordinate2D)coordinate forRegion:(MKCoordinateRegion)region {
+    NSLog(@"going to %f %f", coordinate.latitude, coordinate.longitude);
     [self.localTheatersMapView setCenterCoordinate:coordinate animated:YES];
     [self.localTheatersMapView setRegion:region animated:YES];
 }
