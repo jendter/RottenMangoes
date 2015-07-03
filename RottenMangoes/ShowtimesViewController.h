@@ -10,6 +10,6 @@
 
 @import MapKit;
 
-@interface ShowtimesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
+@interface ShowtimesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate>
 
 @end

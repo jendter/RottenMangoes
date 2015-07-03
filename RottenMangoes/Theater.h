@@ -8,13 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Theater : NSObject
+@import MapKit;
+
+@interface Theater : NSObject <MKAnnotation>
 
 @property (strong, nonatomic) NSString *theaterID;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *address;
 @property (strong, nonatomic) NSNumber *latitude;
 @property (strong, nonatomic) NSNumber *longitude;
+
+@property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
+@property(nonatomic, readonly, copy) NSString *title;
+@property(nonatomic, readonly, copy) NSString *subtitle;
 
 
 @end
