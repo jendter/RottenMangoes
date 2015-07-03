@@ -7,6 +7,7 @@
 //
 
 #import "ShowtimesViewController.h"
+#import "Theater.h"
 
 @import MapKit;
 
@@ -16,11 +17,14 @@
 @property (weak, nonatomic) IBOutlet MKMapView *localTheatersMapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationSearchTextField;
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 
 // Other Properties
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (assign, nonatomic) BOOL initialLocationSet;
 @property (assign, nonatomic) BOOL locationArrowIsEnabled;
+@property (strong, nonatomic) NSArray *localTheaters;
 
 @end
 
@@ -42,11 +46,13 @@
         self.locationSearchTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Zip Code" attributes:@{NSForegroundColorAttributeName: color}];
         
         // Set the clear button color to white (OR grey?)
-//        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [button setImage:[UIImage imageNamed:@"clearSelection"] forState:UIControlStateNormal];
-//        [button setFrame:CGRectMake(0.0f, 0.0f, 15.0f, 15.0f)]; // Required for iOS7
-//        self.locationSearchTextField.rightView = button;
-//        self.locationSearchTextField.rightViewMode = UITextFieldViewModeWhileEditing;
+        /*
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setImage:[UIImage imageNamed:@"clearSelection"] forState:UIControlStateNormal];
+        [button setFrame:CGRectMake(0.0f, 0.0f, 15.0f, 15.0f)]; // Required for iOS7
+        self.locationSearchTextField.rightView = button;
+        self.locationSearchTextField.rightViewMode = UITextFieldViewModeWhileEditing;
+        */
     //-----------------------------------
     
     
@@ -56,6 +62,9 @@
     
     // No initial location set
     self.initialLocationSet = NO;
+    
+    // Test Fetch
+    [self fetchMovieDataForZipCode:@""];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -111,7 +120,7 @@
         [alertController addAction:openAction];
         [self presentViewController:alertController animated:YES completion:nil];
         
-    } else if (self.localTheatersMapView.userLocation) {
+    } else if (self.localTheatersMapView.userLocation && self.initialLocationSet==YES) {
         // If we have permission, center the view on the current GPS coordinates
         [self.localTheatersMapView setCenterCoordinate:self.localTheatersMapView.userLocation.coordinate animated:YES];
         
@@ -120,6 +129,7 @@
     }
     
 }
+
 
 
 #pragma mark CLLocationManagerDelegate
@@ -138,34 +148,100 @@
         self.initialLocationSet = YES;
         self.locationArrowIsEnabled = YES;
         
-        MKCoordinateRegion region = MKCoordinateRegionMake(currentLocation.coordinate, MKCoordinateSpanMake(0.03, 0.03));
+        MKCoordinateRegion region = MKCoordinateRegionMake(currentLocation.coordinate, MKCoordinateSpanMake(0.02, 0.02));
         [self.localTheatersMapView setRegion:region animated:YES];
     }
 }
 
+
+
+#pragma mark - Parsing
+
+-(void)fetchMovieDataForZipCode:(NSString *)zipCode {
+    NSString *urlString = @"http://lighthouse-movie-showtimes.herokuapp.com/theatres.json?address=V6B1E6&movie=Max";
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+            NSError *jsonError;
+            
+            NSDictionary *theatersInZipCodeDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+            
+            if (!theatersInZipCodeDictionary) {
+                NSLog(@"There was an error: %@", error);
+            } else {
+                
+                NSArray *theatresInZipCode = theatersInZipCodeDictionary[@"theatres"];
+                
+                NSMutableArray *theaterObjectsInZipCode = [NSMutableArray array];
+                
+                for (NSDictionary *aTheater in theatresInZipCode
+                     ) {
+                    Theater *newTheater = [Theater new];
+                    
+                    newTheater.theaterID = aTheater[@"id"];
+                    newTheater.name = aTheater[@"name"];
+                    newTheater.address = aTheater[@"address"];
+                    newTheater.latitude = aTheater[@"lat"];
+                    newTheater.longitude = aTheater[@"lng"];
+                    
+                    [theaterObjectsInZipCode addObject:newTheater];
+                }
+                
+                // main thread
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.localTheaters = [NSArray arrayWithArray:theaterObjectsInZipCode];
+                    [self.tableView reloadData];
+                    //[self refreshCellImages];
+                });
+            }
+    }];
+    
+    [task resume];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    if (self.localTheaters) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return self.localTheaters.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"theaterCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    Theater *theaterForCell = self.localTheaters[indexPath.row];
+    
+    cell.textLabel.text = theaterForCell.name;
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.

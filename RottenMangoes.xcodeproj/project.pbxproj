@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270B55761B46175B00899714 /* LighthouseLabsLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 270B55751B46175B00899714 /* LighthouseLabsLocation.gpx */; };
+		272310E01B45E5D1003890EE /* Theater.m in Sources */ = {isa = PBXBuildFile; fileRef = 272310DF1B45E5D1003890EE /* Theater.m */; };
 		27DF50D01B45BE67004FA620 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DF50CF1B45BE67004FA620 /* MapKit.framework */; };
 		27DF50D31B45BF79004FA620 /* ShowtimesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DF50D21B45BF79004FA620 /* ShowtimesViewController.m */; };
 		27F9BDFF1B444E5500657E09 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F9BDFE1B444E5500657E09 /* main.m */; };
@@ -34,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		270B55751B46175B00899714 /* LighthouseLabsLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = LighthouseLabsLocation.gpx; path = "../../../Downloads/Map Hacks - Completed/Map Hacks/LighthouseLabsLocation.gpx"; sourceTree = "<group>"; };
+		272310DE1B45E5D1003890EE /* Theater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theater.h; sourceTree = "<group>"; };
+		272310DF1B45E5D1003890EE /* Theater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Theater.m; sourceTree = "<group>"; };
 		27DF50CF1B45BE67004FA620 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		27DF50D11B45BF79004FA620 /* ShowtimesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowtimesViewController.h; sourceTree = "<group>"; };
 		27DF50D21B45BF79004FA620 /* ShowtimesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowtimesViewController.m; sourceTree = "<group>"; };
@@ -81,6 +86,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		270B55771B46176700899714 /* Test Locations */ = {
+			isa = PBXGroup;
+			children = (
+				270B55751B46175B00899714 /* LighthouseLabsLocation.gpx */,
+			);
+			name = "Test Locations";
+			sourceTree = "<group>";
+		};
+		270B557B1B46199000899714 /* Theaters For Movie */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Theaters For Movie";
+			sourceTree = "<group>";
+		};
+		272310E11B45E5EB003890EE /* Model Objects */ = {
+			isa = PBXGroup;
+			children = (
+				272310DE1B45E5D1003890EE /* Theater.h */,
+				272310DF1B45E5D1003890EE /* Theater.m */,
+				27F9BE221B44541600657E09 /* Movie.h */,
+				27F9BE231B44541600657E09 /* Movie.m */,
+				27F9BE2B1B44B1EE00657E09 /* Review.h */,
+				27F9BE2C1B44B1EE00657E09 /* Review.m */,
+			);
+			name = "Model Objects";
+			sourceTree = "<group>";
+		};
+		272310E21B45E601003890EE /* In Theaters */ = {
+			isa = PBXGroup;
+			children = (
+				27F9BE031B444E5500657E09 /* ViewController.h */,
+				27F9BE041B444E5500657E09 /* ViewController.m */,
+				27F9BE251B445AC800657E09 /* MovieCell.h */,
+				27F9BE261B445AC800657E09 /* MovieCell.m */,
+				272310E31B45E60E003890EE /* Movie Details */,
+			);
+			name = "In Theaters";
+			sourceTree = "<group>";
+		};
+		272310E31B45E60E003890EE /* Movie Details */ = {
+			isa = PBXGroup;
+			children = (
+				27F9BE281B44695A00657E09 /* MovieDetailsViewController.h */,
+				27F9BE291B44695A00657E09 /* MovieDetailsViewController.m */,
+				27F9BE2E1B44BC6A00657E09 /* ReviewCell.h */,
+				27F9BE2F1B44BC6A00657E09 /* ReviewCell.m */,
+				270B557B1B46199000899714 /* Theaters For Movie */,
+			);
+			name = "Movie Details";
+			sourceTree = "<group>";
+		};
+		272310E41B45E624003890EE /* Showtimes */ = {
+			isa = PBXGroup;
+			children = (
+				27DF50D11B45BF79004FA620 /* ShowtimesViewController.h */,
+				27DF50D21B45BF79004FA620 /* ShowtimesViewController.m */,
+			);
+			name = Showtimes;
+			sourceTree = "<group>";
+		};
 		27F9BDF01B444E5500657E09 = {
 			isa = PBXGroup;
 			children = (
@@ -105,20 +171,10 @@
 			children = (
 				27F9BE001B444E5500657E09 /* AppDelegate.h */,
 				27F9BE011B444E5500657E09 /* AppDelegate.m */,
-				27F9BE031B444E5500657E09 /* ViewController.h */,
-				27F9BE041B444E5500657E09 /* ViewController.m */,
-				27F9BE251B445AC800657E09 /* MovieCell.h */,
-				27F9BE261B445AC800657E09 /* MovieCell.m */,
-				27F9BE281B44695A00657E09 /* MovieDetailsViewController.h */,
-				27F9BE291B44695A00657E09 /* MovieDetailsViewController.m */,
-				27F9BE2E1B44BC6A00657E09 /* ReviewCell.h */,
-				27F9BE2F1B44BC6A00657E09 /* ReviewCell.m */,
-				27DF50D11B45BF79004FA620 /* ShowtimesViewController.h */,
-				27DF50D21B45BF79004FA620 /* ShowtimesViewController.m */,
-				27F9BE221B44541600657E09 /* Movie.h */,
-				27F9BE231B44541600657E09 /* Movie.m */,
-				27F9BE2B1B44B1EE00657E09 /* Review.h */,
-				27F9BE2C1B44B1EE00657E09 /* Review.m */,
+				272310E21B45E601003890EE /* In Theaters */,
+				272310E41B45E624003890EE /* Showtimes */,
+				272310E11B45E5EB003890EE /* Model Objects */,
+				270B55771B46176700899714 /* Test Locations */,
 				27F9BE061B444E5500657E09 /* Main.storyboard */,
 				27F9BE091B444E5500657E09 /* Images.xcassets */,
 				27F9BE0B1B444E5500657E09 /* LaunchScreen.xib */,
@@ -235,6 +291,7 @@
 			files = (
 				27F9BE081B444E5500657E09 /* Main.storyboard in Resources */,
 				27F9BE0D1B444E5500657E09 /* LaunchScreen.xib in Resources */,
+				270B55761B46175B00899714 /* LighthouseLabsLocation.gpx in Resources */,
 				27F9BE0A1B444E5500657E09 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +319,7 @@
 				27F9BE2A1B44695A00657E09 /* MovieDetailsViewController.m in Sources */,
 				27F9BE2D1B44B1EE00657E09 /* Review.m in Sources */,
 				27F9BDFF1B444E5500657E09 /* main.m in Sources */,
+				272310E01B45E5D1003890EE /* Theater.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
