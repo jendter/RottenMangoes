@@ -130,7 +130,7 @@
         
         // Center on current location (for immediate user feedback)
             // We also do this after we update the theater list
-            [self clearMapAnnotations]; // Necessary to avoid scrolling bug
+            //[self clearMapAnnotations]; // Necessary to avoid scrolling bug
             CLLocationCoordinate2D coordinate = self.localTheatersMapView.userLocation.coordinate;
             MKCoordinateRegion region = self.localTheatersMapView.region; //MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(0.02, 0.02));
             [self centerMapOnLocationCoordinate:coordinate forRegion:region];
@@ -198,7 +198,7 @@
             // Center the map on the zip code
             // This will happen when the request for theater data completes as well
             // but this means that if the fetch takes a while, the map change will still show immediately
-            [self clearMapAnnotations]; // Necessary to avoid scrolling bug
+            //[self clearMapAnnotations]; // Necessary to avoid scrolling bug
             MKCoordinateRegion mapViewCurrentRegion = [self.localTheatersMapView region];
             [self centerMapOnLocationCoordinate:placemark.location.coordinate forRegion:mapViewCurrentRegion];
             
@@ -249,8 +249,6 @@
                     newTheater.address = aTheater[@"address"];
                     newTheater.latitude = aTheater[@"lat"];
                     newTheater.longitude = aTheater[@"lng"];
-                  
-                    [self.localTheatersMapView addAnnotation:newTheater];
                     
                     [theaterObjectsInZipCode addObject:newTheater];
                 }
@@ -258,6 +256,12 @@
                 // main thread
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.localTheaters = [NSArray arrayWithArray:theaterObjectsInZipCode];
+                    
+                    // Update old annotations and add new ones
+                    [self clearMapAnnotations];
+                    for (Theater *theater in theaterObjectsInZipCode) {
+                        [self.localTheatersMapView addAnnotation:theater];
+                    }
                     
                     // Update the table view
                     [self.tableView reloadData];
