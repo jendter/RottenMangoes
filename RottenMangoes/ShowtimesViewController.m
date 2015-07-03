@@ -128,6 +128,14 @@
         // Set the location arrow to enabled
         self.locationArrowIsEnabled = YES;
         
+        // Center on current location (for immediate user feedback)
+            // We also do this after we update the theater list
+            [self clearMapAnnotations]; // Necessary to avoid scrolling bug
+            CLLocationCoordinate2D coordinate = self.localTheatersMapView.userLocation.coordinate;
+            MKCoordinateRegion region = self.localTheatersMapView.region; //MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(0.02, 0.02));
+            [self centerMapOnLocationCoordinate:coordinate forRegion:region];
+        // ---------
+        
         // Update theater list
         [self updateTheaterListForLocation:[self.locationManager location]];
     }
@@ -181,15 +189,33 @@
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder geocodeAddressString:string inRegion:nil completionHandler:^(NSArray *placemarks, NSError *error) {
         if ([placemarks firstObject]) {
+            self.locationArrowIsEnabled = NO;
             
             CLPlacemark *placemark = [placemarks firstObject];
             NSString *zipCode = placemark.postalCode;
             zipCode = [zipCode stringByReplacingOccurrencesOfString:@" " withString:@""];
-            [self fetchTheaterDataForZipCode:zipCode];
             
-            self.locationArrowIsEnabled = NO;
+            // Center the map on the zip code
+            // This will happen when the request for theater data completes as well
+            // but this means that if the fetch takes a while, the map change will still show immediately
+            [self clearMapAnnotations]; // Necessary to avoid scrolling bug
+            MKCoordinateRegion mapViewCurrentRegion = [self.localTheatersMapView region];
+            [self centerMapOnLocationCoordinate:placemark.location.coordinate forRegion:mapViewCurrentRegion];
+            
+            // Update the theater data
+            [self fetchTheaterDataForZipCode:zipCode];
         }
     }];
+}
+
+-(void)clearMapAnnotations {
+    // Clear the current annotations, so that pins for the previous location are not still shown
+    NSMutableArray *annotations = [self.localTheatersMapView.annotations mutableCopy];   // get all annotations
+    id userLocation = [self.localTheatersMapView userLocation];   // get the current user location
+    if (userLocation) {
+        [annotations removeObject:userLocation];  // remove the user's location from the array, so it doesn't get removed from the map view
+    }
+    [self.localTheatersMapView removeAnnotations:annotations];
 }
 
 -(void)fetchTheaterDataForZipCode:(NSString *)zipCode {
@@ -213,15 +239,6 @@
                 NSArray *theatresInZipCode = theatersInZipCodeDictionary[@"theatres"];
                 
                 NSMutableArray *theaterObjectsInZipCode = [NSMutableArray array];
-                
-                // Clear the current annotations, so that pins for the previous location are not still shown
-                NSMutableArray *annotations = [self.localTheatersMapView.annotations mutableCopy];   // get all annotations
-                id userLocation = [self.localTheatersMapView userLocation];   // get the current user location
-                if (userLocation) {
-                    [annotations removeObject:userLocation];  // remove the user's location from the array, so it doesn't get removed from the map view
-                }
-                [self.localTheatersMapView removeAnnotations:annotations];
-                
                 
                 for (NSDictionary *aTheater in theatresInZipCode
                      ) {
@@ -247,15 +264,15 @@
                     
                     // Update the map
                     if (self.locationArrowIsEnabled) {
+                        
                         CLLocationCoordinate2D coordinate = self.localTheatersMapView.userLocation.coordinate;
-                        MKCoordinateRegion region = MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(0.02, 0.02));
+                        MKCoordinateRegion region = MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(0.025, 0.025));
                             // TODO: Set region to include all theaters
                         
                         [self centerMapOnLocationCoordinate:coordinate forRegion:region];
                         
                     } else {
-                        // Use the zip code's location
-                        //[self centerMapOnLocationCoordinate:self.localTheatersMapView.userLocation.coordinate]; // TODO: REPLACE.
+                        // TODO: Use the zip code's location to center the view
                     }
                     
                     
@@ -266,8 +283,9 @@
     [task resume];
 }
 
+#pragma mark - Centering
+
 -(void)centerMapOnLocationCoordinate:(CLLocationCoordinate2D)coordinate forRegion:(MKCoordinateRegion)region {
-    // If we have permission, center the view on the current GPS coordinates
     [self.localTheatersMapView setCenterCoordinate:coordinate animated:YES];
     [self.localTheatersMapView setRegion:region animated:YES];
 }
@@ -298,6 +316,8 @@
     return cell;
 }
 
+
+
 #pragma mark - Text Field
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     // Seach button tapped in the text field
@@ -305,10 +325,17 @@
 //    NSString *zipCode = [self zipCodeForString:textField.text];
 //    [self fetchMovieDataForZipCode:zipCode];
 //    self.locationArrowIsEnabled = NO;
+    
     [self updateTheaterListForString:textField.text];
     
     return YES;
 }
+
+
+
+
+
+
 
 /*
 // Override to support conditional editing of the table view.
